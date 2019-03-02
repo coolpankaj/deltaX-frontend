@@ -1,0 +1,14 @@
+
+
+span.actor-list:hover{
+    background-color: teal;
+   
+}
+
+a {
+    color: blue !important;
+}
+a:hover {
+    cursor: pointer;
+    text-decoration: underline !important;
+}

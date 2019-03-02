@@ -1,0 +1,65 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="row">
+      <div class="col-md-6 text-center"><button class="btn btn-info" (click)="addNewMovie()">Add New Movie</button></div>
+      <div class="col-md-6"></div>
+    </div>
+  </div>
+  <div class="col-md-10 offset-md-1">
+    <div class="row">
+     
+        <div class="card" style="width: 18rem;" *ngFor="let movie of movies">
+          <div class="card-header text-center font-weight-bold">
+            {{movie.movieName}}
+          </div>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item"><b>Producer :</b>  {{movie.producerName}}</li>
+            <li class="list-group-item" ><b>Actors: </b><span *ngFor="let actor of movie.actors; let first = first; let last = last;"> {{actor.actorName}}{{last?'':', '}}</span></li>
+            <li class="list-group-item"> <b>Year Of release : </b> {{movie.yearOfRelease}}</li>
+          </ul>
+          <div class="card-footer text-center">
+         
+            <button class="btn btn-info btn-sm" (click)="editMovie(movie)">Edit </button><span> <button class="btn btn-danger btn-sm" (click)="deleteMovie(movie)" style="margin-left:10px;">Delete</button></span>
+      
+          </div>
+        </div>
+     
+    </div>
+  </div>
+</div>
+
+<ng-template #edit let-close="close">
+  
+        <div class="modal-header">
+          <h5 class="modal-title">Movie Details</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="close();">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <label for="movieName"><b>Movie Name</b></label>
+          <input type="text" [(ngModel)]="movieName" name="movieName" class="form-control">
+        <br>
+        
+            <label for="yearOfRelease"><b>Year Of Release</b></label>
+            <input type="text" [(ngModel)]="yearOfRelease" name="yearOfRelease" class="form-control">
+            <br>
+<!--------------------------------------------------------------------------------->
+  
+              <label for="actor"><b>Actor</b></label>             
+               <li *ngFor="let actor of actors"><span>{{actor.actorName}}</span><br></li> 
+               
+               <label for="producerName"><b>Producer </b></label>
+            <input type="text" [(ngModel)]="producerName" name="producerName" class="form-control">
+            <br>
+  <!-------------------------------------------------------------------------------------->
+          </div>
+        <div class="modal-footer">
+          
+          <button type="button" class="btn btn-primary" (click)="updateMovie();close()">Save changes</button>
+        </div>
+      
+</ng-template>
+
+
+

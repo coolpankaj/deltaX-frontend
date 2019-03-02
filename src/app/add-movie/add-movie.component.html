@@ -1,0 +1,109 @@
+<div class="row">
+ <div class="col-md-12 border-bottom">
+    <h3 class="text-center">Add New Movie Here <button type="button" class="btn btn-info float-right" [routerLink]="['/']">Home</button> </h3>
+ </div>
+
+ <div class="col-md-6 offset-md-3">
+    
+    <form #addMovieForm="ngForm">
+        <div class="form-group">
+          <label for="movieName">Movie Name</label>
+          <input type="text" [(ngModel)]="movieName" name="movieName" class="form-control" id="movieName"  placeholder="Enter movie name" required>
+        </div>        
+          <div class="form-group">
+              <label for="Year of release">Year of release</label>
+              <input type="number" [(ngModel)]="yearOfRelease" name="yearOfRelease" class="form-control" id="Year of release" placeholder="Year of release" required>
+            </div>
+            <div class="form-group">
+                <label for="actor">Actor</label>
+                <div class="card">
+                    <div class="row">                  
+                        <div  class="col-md-4">
+                          <span *ngFor="let actor of actors;"> <span class="actor-list" (click)="addActor(actor)">{{actor.actorName}}</span> <br></span>
+                          <a (click)="showActorModal()">Add actor</a>
+                        </div>
+                        <div class="col-md-6">
+                          selected actor: <br>
+                          <span *ngFor="let selectedActor of selectedActors">{{selectedActor.actorName}}<br></span>
+                        </div>
+                     
+                      
+                    </div>
+                    
+                  </div>
+              </div><br>
+            <div class="form-group">
+                <label for="Producer">Producer</label>
+                <div class="card">
+                  <div class="row">                  
+                      <div class="col-md-4">
+                        <span *ngFor="let producer of producers"><span class="actor-list" (click)="addProducer(producer)">{{producer.producerName}}</span><br></span>
+                        <a (click)="showproducerModal()">Add producer</a>
+                      </div>
+                      <div class="col-md-6">
+                        selected producer: <br>
+                        <span *ngIf="selectedProducerName">{{selectedProducerName}}<br></span>
+                      </div>
+                   
+                    
+                  </div>
+                </div>
+              </div>
+        <button type="submit" class="btn btn-primary" (click)="addNewMovie()" [disabled]="addMovieForm.form.invalid">Submit</button>
+      </form>
+ </div>
+
+</div>
+
+
+<ng-template #actor let-close="close">
+  
+        <div class="modal-header">
+          <h5 class="modal-title">Add new actor</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="close()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="form-group">
+              <label for="newActorName">Actor Name</label>
+              <input type="text" [(ngModel)]="newActorName" name="newActorName" class="form-control" id="newActorName" placeholder="Enter actor name" required />
+              
+            </div>
+            <div class="modal-footer">
+              <button type="button" [disabled]="!newActorName" class="btn btn-primary" (click)="addNewActor();close()">Save changes</button>
+            </div>
+            
+           
+          </form>
+        </div>
+    
+  
+</ng-template>
+
+<ng-template #producer let-close="close">
+  
+  <div class="modal-header">
+    <h5 class="modal-title">Add new producer</h5>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="close()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form>
+      <div class="form-group">
+        <label for="newProducerName">Producer Name</label>
+        <input type="text" [(ngModel)]="newProducerName" name="newProducerName" class="form-control" id="newProducerName" placeholder="Enter producer name" required />
+        
+      </div>
+      <div class="modal-footer">
+        <button type="button" [disabled]="!newProducerName" class="btn btn-primary" (click)="addNewProducer();close()">Save changes</button>
+      </div>
+      
+     
+    </form>
+  </div>
+
+
+</ng-template>
